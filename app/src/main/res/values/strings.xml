@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">MFPopularMovie</string>
+    <string name="action_setting">Setting</string>
+    <string name="name_movie">Movie Title</string>
+    <string name="movie_details">Movie Details</string>
+    <string name="plot">Plot Synopsis</string>
+    <string name="rating">User Rating</string>
+    <string name="release">Release Date</string>
+    <string name="sortorder_label">Sort Order</string>
+    <string name="sortorder_key">sortOrder</string>
+    <string name="mostPopular">Most Popular</string>
+    <string name="highestrated">Highest Rated</string>
+</resources>
