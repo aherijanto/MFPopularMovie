@@ -217,11 +217,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     }
 
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 
-    }
-}
 
     /*@Override
     /*public void onResume(){
