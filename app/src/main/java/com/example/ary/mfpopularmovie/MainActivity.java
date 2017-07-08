@@ -41,20 +41,26 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     private SwipeRefreshLayout swipecontainer;
     public static final String LOG_TAG = MoviesAdapter.class.getName();
 
-    SharedPreferences.OnSharedPreferenceChangeListener mlistener;
+    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mlistener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        preferences.registerOnSharedPreferenceChangeListener(this);
+
+
+
+
+        /*mlistener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences prefs, String s) {
                 Log.d(LOG_TAG, "Pref Updated");
                 checkSortOrder();
             }
-        };
+        };*/
 
         loadview();
         swipecontainer = (SwipeRefreshLayout) findViewById(R.id.main_content);
@@ -203,7 +209,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
 
     private void checkSortOrder() {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        /* --->moving to onCreate SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);*/
         String sortOrder = preferences.getString(this.getString(R.string.sortorder_key), this.getString(R.string.mostPopular));
 
         if (sortOrder.equals(this.getString(R.string.mostPopular))) {
