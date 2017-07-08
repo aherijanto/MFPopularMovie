@@ -53,15 +53,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
 
 
-
-        /*mlistener = new SharedPreferences.OnSharedPreferenceChangeListener() {
-            @Override
-            public void onSharedPreferenceChanged(SharedPreferences prefs, String s) {
-                Log.d(LOG_TAG, "Pref Updated");
-                checkSortOrder();
-            }
-        };*/
-
         loadview();
         swipecontainer = (SwipeRefreshLayout) findViewById(R.id.main_content);
         swipecontainer.setColorSchemeResources(android.R.color.holo_orange_dark);
