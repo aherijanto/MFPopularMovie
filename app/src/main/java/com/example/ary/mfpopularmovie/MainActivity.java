@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+       preferences = PreferenceManager.getDefaultSharedPreferences(this);
         preferences.registerOnSharedPreferenceChangeListener(this);
 
 
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         }
 
-        return null;
+        return this;
 
     }
 
