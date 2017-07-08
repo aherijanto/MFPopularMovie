@@ -101,7 +101,15 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
-        loadJSON();
+        if(isNetworkAvailable(this)) {
+            loadJSON();
+        }
+        else{
+            Toast.makeText(MainActivity.this,"No Network Available",Toast.LENGTH_SHORT).show();
+
+        }
+
+
 
 
     }
@@ -219,7 +227,14 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         Log.d(LOG_TAG,"Pref Updated");
         checkSortOrder();
     }
+
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+    }
 }
+
 
 
     /*@Override
