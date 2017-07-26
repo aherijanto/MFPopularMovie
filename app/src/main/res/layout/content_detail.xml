@@ -10,14 +10,20 @@
     tools:context="com.example.ary.mfpopularmovie.DetailActivity"
     tools:showIn="@layout/activity_detail">
     
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ad">
+
+    
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:showIn="@layout/activity_detail">
         
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
             
             <TextView
                 android:layout_width="match_parent"
@@ -100,10 +106,18 @@
                 android:layout_marginTop="@dimen/layout_mergin_top"
                 android:textSize="20dp"/>
 
+            <TextView
+                android:id="@+id/trailer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:text="@string/trailer"/>
 
 
 
 
-        </LinearLayout>
+
+        </android.support.constraint.ConstraintLayout>
     </ScrollView>
+    </LinearLayout>
 </RelativeLayout>

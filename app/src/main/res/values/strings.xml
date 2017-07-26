@@ -10,4 +10,5 @@
     <string name="sortorder_key">sortOrder</string>
     <string name="mostPopular">Most Popular</string>
     <string name="highestrated">Highest Rated</string>
+    <string name="trailer">Trailer</string>
 </resources>
