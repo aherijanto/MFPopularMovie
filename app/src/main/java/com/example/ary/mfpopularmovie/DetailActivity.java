@@ -33,7 +33,7 @@ public class DetailActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        loadCollapsingToolbar();
+        initCollapsingToolbar();
 
         imageView=(ImageView) findViewById(R.id.thumbnail_image_header);
         nameofMovies=(TextView) findViewById(R.id.movietitle);
@@ -65,7 +65,7 @@ public class DetailActivity extends AppCompatActivity {
             }
     }
 
-        private void loadCollapsingToolbar(){
+        private void initCollapsingToolbar(){
             final CollapsingToolbarLayout collapsingToolbarLayout=(CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
 
             collapsingToolbarLayout.setTitle(" ");
