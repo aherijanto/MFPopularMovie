@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.ary.mfpopularmovie.adapter.TrailerAdapter;
 import com.example.ary.mfpopularmovie.api.Client;
 import com.example.ary.mfpopularmovie.api.Service;
 import com.example.ary.mfpopularmovie.model.Trailer;
