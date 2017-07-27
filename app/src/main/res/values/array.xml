@@ -3,5 +3,6 @@
     <string-array name="pref_sort_order">
         <item>@string/mostPopular</item>
         <item>@string/highestrated</item>
+        <item>@string/favorite</item>
     </string-array>
 </resources>

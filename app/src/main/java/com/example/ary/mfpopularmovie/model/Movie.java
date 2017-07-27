@@ -68,6 +68,10 @@ public class Movie {
 
     }
 
+    public Movie(){
+
+    }
+
     String imageURL="https://image.tmdb.org/t/p/w500";
 
     public String getPosterpath(){
@@ -124,7 +128,7 @@ public class Movie {
 
     }
 
-    public void setOriginaltitle(){
+    public void setOriginaltitle(String originaltitle){
         this.originaltitle=originaltitle;
     }
 

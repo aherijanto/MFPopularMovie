@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 import com.example.ary.mfpopularmovie.adapter.MoviesAdapter;
 import com.example.ary.mfpopularmovie.api.Client;
 import com.example.ary.mfpopularmovie.api.Service;
+import com.example.ary.mfpopularmovie.data.FavoriteDBHelper;
 import com.example.ary.mfpopularmovie.model.Movie;
 import com.example.ary.mfpopularmovie.model.MoviesResponse;
 
@@ -41,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     private List<Movie> movieList;
     ProgressDialog pd;
     private SwipeRefreshLayout swipecontainer;
+    private FavoriteDBHelper favoriteDBHelper;
+    private AppCompatActivity activity=MainActivity.this;
     public static final String LOG_TAG = MoviesAdapter.class.getName();
 
     SharedPreferences preferences;
@@ -50,24 +54,24 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        preferences.registerOnSharedPreferenceChangeListener(this);
+       //preferences = PreferenceManager.getDefaultSharedPreferences(this);
+       // preferences.registerOnSharedPreferenceChangeListener(this);
 
 
 
         loadview();
-        swipecontainer = (SwipeRefreshLayout) findViewById(R.id.main_content);
-        swipecontainer.setColorSchemeResources(android.R.color.holo_orange_dark);
-        swipecontainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                loadview();
-                Toast.makeText(MainActivity.this, "Refresh", Toast.LENGTH_SHORT).show();
+        //swipecontainer = (SwipeRefreshLayout) findViewById(R.id.main_content);
+        //swipecontainer.setColorSchemeResources(android.R.color.holo_orange_dark);
+        //swipecontainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        //    @Override
+        //    public void onRefresh() {
+        //        loadview();
+        //        Toast.makeText(MainActivity.this, "Refresh", Toast.LENGTH_SHORT).show();
             }
 
-        });
+        //});
 
-    }
+
 
     public Activity getActivity() {
         Context context = this;
@@ -84,10 +88,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     }
 
     public void loadview() {
-        pd = new ProgressDialog(this);
-        pd.setMessage("Loading Movies Data...");
-        pd.setCancelable(true);
-        pd.show();
+        //pd = new ProgressDialog(this);
+        //pd.setMessage("Loading Movies Data...");
+        //pd.setCancelable(true);
+        //pd.show();
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         movieList = new ArrayList<Movie>();
@@ -103,6 +107,21 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
+        favoriteDBHelper=new FavoriteDBHelper(activity);
+
+        swipecontainer = (SwipeRefreshLayout) findViewById(R.id.main_content);
+        swipecontainer.setColorSchemeResources(android.R.color.holo_orange_dark);
+        swipecontainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadview();
+                Toast.makeText(MainActivity.this, "Refresh", Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+        checkSortOrder();
+
         if(isNetworkAvailable(this)) {
             loadJSON();
         }
@@ -113,6 +132,23 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
 
 
+
+    }
+
+    private void loadviewFavorite() {
+        recyclerView=(RecyclerView)findViewById(R.id.recycler_view);
+        movieList=new ArrayList<Movie>();
+        adapter=new MoviesAdapter(this,movieList);
+        if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        } else {
+            recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
+        }
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        favoriteDBHelper=new FavoriteDBHelper(activity);
+        getAllFavorite();
 
     }
 
@@ -216,7 +252,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         if (sortOrder.equals(this.getString(R.string.mostPopular))) {
             Log.d(LOG_TAG, "Sorting By Most Popular Movie");
             loadJSON();
-
+        }else if (sortOrder.equals(this.getString(R.string.favorite))){
+            Log.d(LOG_TAG,"Sorting By Favorite");
+            loadviewFavorite();
         } else {
             Log.d(LOG_TAG, "Sorting By Top Rated Movie");
             loadJSONTopRated();
@@ -234,6 +272,24 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+    }
+
+    public void getAllFavorite(){
+        new AsyncTask<Void,Void,Void>(){
+
+            @Override
+            protected Void doInBackground(Void...params){
+                movieList.clear();
+                movieList.addAll(favoriteDBHelper.getAllFavorite());
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid){
+                super.onPostExecute(aVoid);
+                adapter.notifyDataSetChanged();
+            }
+        }.execute();
     }
 }
 

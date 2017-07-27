@@ -11,4 +11,5 @@
     <string name="mostPopular">Most Popular</string>
     <string name="highestrated">Highest Rated</string>
     <string name="trailer">Trailer</string>
+    <string name="favorite">Favorite</string>
 </resources>
