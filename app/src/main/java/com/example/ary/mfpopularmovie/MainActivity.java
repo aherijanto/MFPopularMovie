@@ -54,8 +54,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       //preferences = PreferenceManager.getDefaultSharedPreferences(this);
-       // preferences.registerOnSharedPreferenceChangeListener(this);
+       preferences = PreferenceManager.getDefaultSharedPreferences(this);
+       preferences.registerOnSharedPreferenceChangeListener(this);
 
 
 
