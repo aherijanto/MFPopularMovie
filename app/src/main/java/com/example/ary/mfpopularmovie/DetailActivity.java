@@ -80,6 +80,7 @@ public class DetailActivity extends AppCompatActivity {
                 Toast.makeText(this,"No API Data",Toast.LENGTH_SHORT).show();
 
             }
+            initViews();
     }
 
         private void initCollapsingToolbar(){
@@ -152,6 +153,9 @@ public class DetailActivity extends AppCompatActivity {
                     Toast.makeText(DetailActivity.this,"Error fetching trailer",Toast.LENGTH_SHORT).show();
                 }
             });
+        }catch (Exception e){
+            Log.d("Something went wrong",e.getMessage());
+            Toast.makeText(this,e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
   }
