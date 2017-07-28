@@ -54,8 +54,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       //preferences = PreferenceManager.getDefaultSharedPreferences(this);
-       // preferences.registerOnSharedPreferenceChangeListener(this);
+       preferences = PreferenceManager.getDefaultSharedPreferences(this);
+       preferences.registerOnSharedPreferenceChangeListener(this);
 
 
 
@@ -88,10 +88,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     }
 
     public void loadview() {
-        //pd = new ProgressDialog(this);
-        //pd.setMessage("Loading Movies Data...");
-        //pd.setCancelable(true);
-        //pd.show();
+        pd = new ProgressDialog(this);
+        pd.setMessage("Loading Movies Data...");
+        pd.setCancelable(true);
+        pd.show();
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         movieList = new ArrayList<Movie>();
@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
             Client Client = new Client();
 
-            Service apiService = Client.getClient().create(Service.class);
+            Service apiService = com.example.ary.mfpopularmovie.api.Client.getClient().create(Service.class);
             retrofit2.Call<MoviesResponse> call = apiService.getPopularMovies(BuildConfig.MY_API_TOKEN);
             call.enqueue(new Callback<MoviesResponse>() {
                 @Override
@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
             Client Client = new Client();
 
-            Service apiService = Client.getClient().create(Service.class);
+            Service apiService = com.example.ary.mfpopularmovie.api.Client.getClient().create(Service.class);
             retrofit2.Call<MoviesResponse> call = apiService.getTopRatedMovies(BuildConfig.MY_API_TOKEN);
             call.enqueue(new Callback<MoviesResponse>() {
                 @Override
