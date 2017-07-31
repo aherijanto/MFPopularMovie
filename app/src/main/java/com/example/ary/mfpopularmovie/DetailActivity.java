@@ -52,7 +52,7 @@ public class DetailActivity extends AppCompatActivity {
     private final AppCompatActivity activity=DetailActivity.this;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
@@ -185,9 +185,10 @@ public class DetailActivity extends AppCompatActivity {
             Call<TrailerResponse> mCall=apiService.getMovieTrailer(movie_id,BuildConfig.MY_API_TOKEN);
             mCall.enqueue(new Callback<TrailerResponse>() {
                 @Override
-                public void onResponse(Call<TrailerResponse> call, Response<TrailerResponse> response) {
-                    List<Trailer> mTrailer=response.body().getResults();
-                    recyclerView.setAdapter(new TrailerAdapter(getApplicationContext(),mTrailer));
+                public void onResponse(retrofit2.Call<TrailerResponse> call, retrofit2.Response<TrailerResponse> response) {
+
+                    List<Trailer> trailer = response.body().getResults();
+                    recyclerView.setAdapter(new TrailerAdapter(getApplicationContext(),trailer));
                     recyclerView.smoothScrollToPosition(0);
                 }
 

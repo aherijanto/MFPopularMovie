@@ -7,6 +7,7 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class Trailer {
+
     @SerializedName("key")
     private String key;
 
@@ -29,7 +30,7 @@ public class Trailer {
     }
 
 
-    public java.lang.String getName() {
+    public String getName() {
         return name;
     }
 

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ary.mfpopularmovie.R;
+import com.example.ary.mfpopularmovie.model.MoviesResponse;
 import com.example.ary.mfpopularmovie.model.Trailer;
 
 import java.util.List;
@@ -70,7 +71,8 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.MyViewHo
                     if (pos!=RecyclerView.NO_POSITION){
                         Trailer clickedDataItem=trailerList.get(pos);
                         String videoId=trailerList.get(pos).getKey();
-                        Intent intent= new Intent(Intent.ACTION_VIEW, Uri.parse("vnd:youtube"+videoId));
+                        Intent intent= new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube"+videoId));
+
                         intent.putExtra("VIDEO_ID",videoId);
                         mContext.startActivity(intent);
                         Toast.makeText(v.getContext(),"You clicked"+clickedDataItem.getName(),Toast.LENGTH_LONG).show();

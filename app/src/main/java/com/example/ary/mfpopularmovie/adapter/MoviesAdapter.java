@@ -23,6 +23,7 @@ import java.util.List;
  */
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHolder> {
+
     private Context mContext;
     private List<Movie> movieList;
 
@@ -45,6 +46,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
         viewHolder.title.setText(movieList.get(i).getOriginaltitle());
         String vote=Double.toString(movieList.get(i).getVoteAverage());
         viewHolder.userrating.setText(vote);
+
 
         Glide.with(mContext)
                 .load(movieList.get(i).getPosterpath())
