@@ -104,7 +104,7 @@ public class DetailActivity extends AppCompatActivity {
                         if (favorite){
                             SharedPreferences.Editor editor=getSharedPreferences("com.example.ary.mfpopularmovie.DetailActicity",MODE_PRIVATE).edit();
                             editor.putBoolean("Favorite Added",true);
-                            editor.commit();
+                            editor.apply();
                             saveFavorite();
                             Snackbar.make(buttonView,"Added to Favorite",Snackbar.LENGTH_SHORT).show();
                         }else{
@@ -114,7 +114,7 @@ public class DetailActivity extends AppCompatActivity {
 
                             SharedPreferences.Editor editor=getSharedPreferences("com.example.ary.mfpopularmovie.DetailActicity",MODE_PRIVATE).edit();
                             editor.putBoolean("Favorite Remove",true);
-                            editor.commit();
+                            editor.apply();
                             Snackbar.make(buttonView,"Removed from Favorite",Snackbar.LENGTH_SHORT).show();
                         }
 
