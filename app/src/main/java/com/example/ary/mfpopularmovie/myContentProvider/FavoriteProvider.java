@@ -1,6 +1,7 @@
 package com.example.ary.mfpopularmovie.myContentProvider;
 
 import android.content.ContentProvider;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
@@ -32,7 +33,7 @@ public class FavoriteProvider extends ContentProvider {
     static final String mPlot="myPlot";
 
     static final int UriCode=1;
-    private static HashMap<String,String> values;
+    private FavoriteDBHelper myDBHelper;
 
 
     static final UriMatcher uriMatcher;
@@ -58,7 +59,7 @@ public class FavoriteProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        FavoriteDBHelper myDBHelper= new FavoriteDBHelper(getContext());
+        myDBHelper= new FavoriteDBHelper(getContext());
         myDB=myDBHelper.getWritableDatabase();
         if (myDB!=null){
             return true;
@@ -72,18 +73,16 @@ public class FavoriteProvider extends ContentProvider {
 
         SQLiteQueryBuilder sqLiteQueryBuilder=new SQLiteQueryBuilder();
         sqLiteQueryBuilder.setTables(FavoriteContract.FavoriteEntry.TABLE_NAME);
-
+        Cursor myCursor;
         switch (uriMatcher.match(uri)){
             case UriCode:
-                sqLiteQueryBuilder.setProjectionMap(values);
+                myCursor=sqLiteQueryBuilder.query(myDB,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown Uri"+uri);
 
 
         }
-
-        Cursor myCursor=sqLiteQueryBuilder.query(myDB,projection,selection,selectionArgs,null,null,sortOrder);
         myCursor.setNotificationUri(getContext().getContentResolver(),uri);
 
 
@@ -110,7 +109,28 @@ public class FavoriteProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
-        return null;
+        myDB=myDBHelper.getWritableDatabase();
+        Uri myUri;
+        switch (uriMatcher.match(uri)){
+            case UriCode:
+                long rowID=myDB.insert(FavoriteContract.FavoriteEntry.TABLE_NAME,null,values);
+                if (rowID>0){
+                  myUri = ContentUris.withAppendedId(CONTENT_URL,rowID);
+
+                }else {
+                    throw new android.database.SQLException("Failed to insert row into " + uri);
+                }
+
+                break;
+
+            default:
+                throw new IllegalArgumentException("Unknown Uri"+uri);
+
+
+        }
+        getContext().getContentResolver().notifyChange(uri,null);
+
+        return myUri;
     }
 
     @Override
