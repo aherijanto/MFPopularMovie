@@ -43,17 +43,17 @@ public class FavoriteProvider extends ContentProvider {
     }
 
     SQLiteDatabase myDB;
-    static final String myDBName=FavoriteDBHelper.DATABASE_NAME;
-    static final String myTableName= FavoriteContract.FavoriteEntry.TABLE_NAME;
-    static final int myDBVersion=FavoriteDBHelper.DATABASE_VERSION;
-    static final String mCreateTable="CREATE TABLE"+" "+FavoriteContract.FavoriteEntry.TABLE_NAME+"("+
-            FavoriteContract.FavoriteEntry._ID+"INTEGER PRIMARY KEY AUTOINCREMENT,"+
-            FavoriteContract.FavoriteEntry.COLUMN_MOVIEID+"INTEGER,"+
-            FavoriteContract.FavoriteEntry.COLUMN_TITLE+"TEXT NOT NULL,"+
-            FavoriteContract.FavoriteEntry.COLUMN_USERRATING+"REAL NOT NULL,"+
-            FavoriteContract.FavoriteEntry.COLUMN_POSTERPATH+"TEXT NOT NULL,"+
-            FavoriteContract.FavoriteEntry.COLUMN_PLOT_SYNOPSIS+"TEXT NOT NULL"+
-            ");" ;
+    //static final String myDBName=FavoriteDBHelper.DATABASE_NAME;
+    //static final String myTableName= FavoriteContract.FavoriteEntry.TABLE_NAME;
+    //static final int myDBVersion=FavoriteDBHelper.DATABASE_VERSION;
+    //static final String mCreateTable="CREATE TABLE"+" "+FavoriteContract.FavoriteEntry.TABLE_NAME+"("+
+    //        FavoriteContract.FavoriteEntry._ID+"INTEGER PRIMARY KEY AUTOINCREMENT,"+
+     //       FavoriteContract.FavoriteEntry.COLUMN_MOVIEID+"INTEGER,"+
+     //       FavoriteContract.FavoriteEntry.COLUMN_TITLE+"TEXT NOT NULL,"+
+      //      FavoriteContract.FavoriteEntry.COLUMN_USERRATING+"REAL NOT NULL,"+
+     //       FavoriteContract.FavoriteEntry.COLUMN_POSTERPATH+"TEXT NOT NULL,"+
+     //       FavoriteContract.FavoriteEntry.COLUMN_PLOT_SYNOPSIS+"TEXT NOT NULL"+
+     //       ");" ;
 
 
     @Override
@@ -71,7 +71,7 @@ public class FavoriteProvider extends ContentProvider {
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
 
         SQLiteQueryBuilder sqLiteQueryBuilder=new SQLiteQueryBuilder();
-        sqLiteQueryBuilder.setTables(myTableName);
+        sqLiteQueryBuilder.setTables(FavoriteContract.FavoriteEntry.TABLE_NAME);
 
         switch (uriMatcher.match(uri)){
             case UriCode:
