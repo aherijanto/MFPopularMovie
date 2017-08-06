@@ -31,6 +31,15 @@
         <activity android:name=".SettingsActivity"
             android:label="Setting"/>
 
+        <provider
+            android:authorities="package com.example.ary.mfpopularmovie.myContentProvider.FavoriteProvider"
+            android:name=".myContentProvider.FavoriteProvider"
+            android:exported="true"
+            android:multiprocess="true">
+
+
+        </provider>
+
     </application>
 
 </manifest>

@@ -18,8 +18,8 @@ import java.util.List;
 
 public class FavoriteDBHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME="favorite.db";
-    private static final int DATABASE_VERSION=1;
+   public static String DATABASE_NAME="favorite.db";
+    public static final int DATABASE_VERSION=1;
 
     public static final String LOGTAG="FAVORITE";
 
