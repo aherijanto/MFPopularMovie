@@ -182,6 +182,7 @@ public class FavoriteProvider extends ContentProvider {
         return rowsUpdated;
     }
 
+    //move from FavoriteDBHelper
     public void addFavorite(Movie movie){
         //SQLiteDatabase db=this.getWritableDatabase();
         ContentValues values=new ContentValues();
