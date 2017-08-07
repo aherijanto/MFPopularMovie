@@ -3,6 +3,7 @@ package com.example.ary.mfpopularmovie.myContentProvider;
 import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -183,7 +184,7 @@ public class FavoriteProvider extends ContentProvider {
     }
 
     //move from FavoriteDBHelper
-    public void addFavorite(Movie movie){
+    public static void addFavorite(Movie movie){
         //SQLiteDatabase db=this.getWritableDatabase();
         ContentValues values=new ContentValues();
 
@@ -194,7 +195,7 @@ public class FavoriteProvider extends ContentProvider {
         values.put(FavoriteContract.FavoriteEntry.COLUMN_POSTERPATH,movie.getPosterpath());
         values.put(FavoriteContract.FavoriteEntry.COLUMN_PLOT_SYNOPSIS,movie.getOverview());
 
-        Uri uri=getContext().getContentResolver().insert(FavoriteProvider.CONTENT_URL,values);
+        Uri uri = getContext().getContentResolver().insert(FavoriteProvider.CONTENT_URL,values);
         //getContentResolver().insert(FavoriteProvider.CONTENT_URL,values);
         //if(uri != null) {
         //    Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
@@ -204,6 +205,8 @@ public class FavoriteProvider extends ContentProvider {
         //db.insert(FavoriteContract.FavoriteEntry.TABLE_NAME,null,values);
         //db.close();
     }
+
+
 
 
 }
