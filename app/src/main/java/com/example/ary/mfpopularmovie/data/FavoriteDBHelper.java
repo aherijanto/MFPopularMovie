@@ -46,12 +46,12 @@ public class FavoriteDBHelper extends SQLiteOpenHelper {
 
     public void onCreate(SQLiteDatabase sqLiteDatabase){
         final String SQL_CREATE_FAVORITE_TABLE="CREATE TABLE"+" "+FavoriteContract.FavoriteEntry.TABLE_NAME+"("+
-                FavoriteContract.FavoriteEntry._ID+"INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                FavoriteContract.FavoriteEntry.COLUMN_MOVIEID+"INTEGER,"+
-                FavoriteContract.FavoriteEntry.COLUMN_TITLE+"TEXT NOT NULL,"+
-                FavoriteContract.FavoriteEntry.COLUMN_USERRATING+"REAL NOT NULL,"+
-                FavoriteContract.FavoriteEntry.COLUMN_POSTERPATH+"TEXT NOT NULL,"+
-                FavoriteContract.FavoriteEntry.COLUMN_PLOT_SYNOPSIS+"TEXT NOT NULL"+
+                FavoriteContract.FavoriteEntry._ID+" "+"INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                FavoriteContract.FavoriteEntry.COLUMN_MOVIEID+" "+"INTEGER, "+
+                FavoriteContract.FavoriteEntry.COLUMN_TITLE+" "+"TEXT NOT NULL, "+
+                FavoriteContract.FavoriteEntry.COLUMN_USERRATING+" "+"REAL NOT NULL, "+
+                FavoriteContract.FavoriteEntry.COLUMN_POSTERPATH+" "+"TEXT NOT NULL, "+
+                FavoriteContract.FavoriteEntry.COLUMN_PLOT_SYNOPSIS+" "+"TEXT NOT NULL "+
                 ");" ;
 
         sqLiteDatabase.execSQL(SQL_CREATE_FAVORITE_TABLE);
@@ -60,7 +60,7 @@ public class FavoriteDBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS"+FavoriteContract.FavoriteEntry.TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+FavoriteContract.FavoriteEntry.TABLE_NAME);
         onCreate(sqLiteDatabase);
     }
 
@@ -104,7 +104,7 @@ public class FavoriteDBHelper extends SQLiteOpenHelper {
                 FavoriteContract.FavoriteEntry.COLUMN_PLOT_SYNOPSIS
 
         };
-        String sortOrder= FavoriteContract.FavoriteEntry._ID+"ASC;";
+        String sortOrder= FavoriteContract.FavoriteEntry._ID+" ASC;";
         List<Movie> favoriteList=new ArrayList<Movie>();
         SQLiteDatabase db=getReadableDatabase();
 
