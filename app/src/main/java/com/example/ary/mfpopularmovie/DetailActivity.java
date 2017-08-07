@@ -222,35 +222,12 @@ public class DetailActivity extends AppCompatActivity {
         mFavorite.setOverview(plotSynopsis.getText().toString().trim());
 
 
-        addFavorite(mFavorite);
+        FavoriteProvider.addFavorite(mFavorite,this);
         //favoriteDBHelper.addFavorite(mFavorite);
 
     }
 
-    public void addFavorite(Movie movie){
-        //SQLiteDatabase db=this.getWritableDatabase();
-        ContentValues values=new ContentValues();
 
-
-        values.put(FavoriteContract.FavoriteEntry.COLUMN_MOVIEID, movie.getId());
-        values.put(FavoriteContract.FavoriteEntry.COLUMN_TITLE,movie.getOriginaltitle());
-        values.put(FavoriteContract.FavoriteEntry.COLUMN_USERRATING, movie.getVoteAverage());
-        values.put(FavoriteContract.FavoriteEntry.COLUMN_POSTERPATH,movie.getPosterpath());
-        values.put(FavoriteContract.FavoriteEntry.COLUMN_PLOT_SYNOPSIS,movie.getOverview());
-
-
-
-
-        Uri uri = getContentResolver().insert(FavoriteProvider.CONTENT_URL,values);
-        //getContentResolver().insert(FavoriteProvider.CONTENT_URL,values);
-        if(uri != null) {
-            Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
-        }
-
-
-        //db.insert(FavoriteContract.FavoriteEntry.TABLE_NAME,null,values);
-        //db.close();
-    }
 
 }
 

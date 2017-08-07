@@ -184,7 +184,7 @@ public class FavoriteProvider extends ContentProvider {
     }
 
     //move from FavoriteDBHelper
-    public void addFavorite(Movie movie){
+    public static void addFavorite(Movie movie, Context context){
         //SQLiteDatabase db=this.getWritableDatabase();
         ContentValues values=new ContentValues();
 
@@ -198,11 +198,11 @@ public class FavoriteProvider extends ContentProvider {
 
 
 
-        Uri uri = getContext().getContentResolver().insert(FavoriteProvider.CONTENT_URL,values);
+        Uri uri = context.getContentResolver().insert(FavoriteProvider.CONTENT_URL,values);
         //getContentResolver().insert(FavoriteProvider.CONTENT_URL,values);
-        //if(uri != null) {
-        //    Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
-        //}
+        if(uri != null) {
+           Toast.makeText(context, uri.toString(), Toast.LENGTH_LONG).show();
+        }
 
 
         //db.insert(FavoriteContract.FavoriteEntry.TABLE_NAME,null,values);
