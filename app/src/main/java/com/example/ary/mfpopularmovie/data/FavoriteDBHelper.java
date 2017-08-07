@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.example.ary.mfpopularmovie.model.Movie;
+import com.example.ary.mfpopularmovie.myContentProvider.FavoriteProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,16 +63,17 @@ public class FavoriteDBHelper extends SQLiteOpenHelper {
     }
 
     public void addFavorite(Movie movie){
-        SQLiteDatabase db=this.getWritableDatabase();
+        //SQLiteDatabase db=this.getWritableDatabase();
         ContentValues values=new ContentValues();
-        values.put(FavoriteContract.FavoriteEntry.COLUMN_MOVIEID, movie.getId());
-        values.put(FavoriteContract.FavoriteEntry.COLUMN_TITLE,movie.getOriginaltitle());
-        values.put(FavoriteContract.FavoriteEntry.COLUMN_USERRATING, movie.getVoteAverage());
-        values.put(FavoriteContract.FavoriteEntry.COLUMN_POSTERPATH,movie.getPosterpath());
-        values.put(FavoriteContract.FavoriteEntry.COLUMN_PLOT_SYNOPSIS,movie.getOverview());
 
-        db.insert(FavoriteContract.FavoriteEntry.TABLE_NAME,null,values);
-        db.close();
+        //values.put(FavoriteContract.FavoriteEntry.COLUMN_MOVIEID, movie.getId());
+        //values.put(FavoriteContract.FavoriteEntry.COLUMN_TITLE,movie.getOriginaltitle());
+        //values.put(FavoriteContract.FavoriteEntry.COLUMN_USERRATING, movie.getVoteAverage());
+        //values.put(FavoriteContract.FavoriteEntry.COLUMN_POSTERPATH,movie.getPosterpath());
+        //values.put(FavoriteContract.FavoriteEntry.COLUMN_PLOT_SYNOPSIS,movie.getOverview());
+
+        //db.insert(FavoriteContract.FavoriteEntry.TABLE_NAME,null,values);
+        //db.close();
     }
 
     public void deleteFavorite(int id){

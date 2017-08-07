@@ -135,11 +135,50 @@ public class FavoriteProvider extends ContentProvider {
 
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
+        myDB=myDBHelper.getWritableDatabase();
+
+        int mDeleted;
+        switch (uriMatcher.match(uri)){
+            case UriCode:
+                String id = uri.getPathSegments().get(1);
+
+                mDeleted = myDB.delete(FavoriteContract.FavoriteEntry.TABLE_NAME, "_id=?", new String[]{id});
+                break;
+
+            default:
+                throw new IllegalArgumentException("Unknown Uri"+uri);
+
+
+        }
+        if (mDeleted != 0) {
+
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+
+
+        return mDeleted;
     }
 
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
+        int rowsUpdated=0;
+
+        switch (uriMatcher.match(uri)){
+            case UriCode:
+
+
+                rowsUpdated = myDB.update(FavoriteContract.FavoriteEntry.TABLE_NAME,values,selection,selectionArgs);
+                break;
+
+            default:
+                throw new IllegalArgumentException("Unknown Uri"+uri);
+
+
+        }
+        getContext().getContentResolver().notifyChange(uri,null);
+
+        return rowsUpdated;
     }
+
 }
+
