@@ -1,7 +1,9 @@
 package com.example.ary.mfpopularmovie;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -219,9 +221,36 @@ public class DetailActivity extends AppCompatActivity {
         mFavorite.setVoteAverage(Double.parseDouble(rate));
         mFavorite.setOverview(plotSynopsis.getText().toString().trim());
 
-        //----> FavoriteProvider.addFavorite(mFavorite);
+
+        addFavorite(mFavorite);
         //favoriteDBHelper.addFavorite(mFavorite);
 
     }
-  }
+
+    public void addFavorite(Movie movie){
+        //SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues values=new ContentValues();
+
+
+        values.put(FavoriteContract.FavoriteEntry.COLUMN_MOVIEID, movie.getId());
+        values.put(FavoriteContract.FavoriteEntry.COLUMN_TITLE,movie.getOriginaltitle());
+        values.put(FavoriteContract.FavoriteEntry.COLUMN_USERRATING, movie.getVoteAverage());
+        values.put(FavoriteContract.FavoriteEntry.COLUMN_POSTERPATH,movie.getPosterpath());
+        values.put(FavoriteContract.FavoriteEntry.COLUMN_PLOT_SYNOPSIS,movie.getOverview());
+
+
+
+
+        Uri uri = getContentResolver().insert(FavoriteProvider.CONTENT_URL,values);
+        //getContentResolver().insert(FavoriteProvider.CONTENT_URL,values);
+        if(uri != null) {
+            Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
+        }
+
+
+        //db.insert(FavoriteContract.FavoriteEntry.TABLE_NAME,null,values);
+        //db.close();
+    }
+
+}
 

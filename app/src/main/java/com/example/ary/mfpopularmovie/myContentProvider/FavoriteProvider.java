@@ -184,7 +184,7 @@ public class FavoriteProvider extends ContentProvider {
     }
 
     //move from FavoriteDBHelper
-    public static void addFavorite(Movie movie){
+    public void addFavorite(Movie movie){
         //SQLiteDatabase db=this.getWritableDatabase();
         ContentValues values=new ContentValues();
 
@@ -194,6 +194,9 @@ public class FavoriteProvider extends ContentProvider {
         values.put(FavoriteContract.FavoriteEntry.COLUMN_USERRATING, movie.getVoteAverage());
         values.put(FavoriteContract.FavoriteEntry.COLUMN_POSTERPATH,movie.getPosterpath());
         values.put(FavoriteContract.FavoriteEntry.COLUMN_PLOT_SYNOPSIS,movie.getOverview());
+
+
+
 
         Uri uri = getContext().getContentResolver().insert(FavoriteProvider.CONTENT_URL,values);
         //getContentResolver().insert(FavoriteProvider.CONTENT_URL,values);
