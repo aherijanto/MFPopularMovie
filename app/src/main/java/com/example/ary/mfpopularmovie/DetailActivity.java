@@ -21,10 +21,12 @@ import com.bumptech.glide.Glide;
 import com.example.ary.mfpopularmovie.adapter.TrailerAdapter;
 import com.example.ary.mfpopularmovie.api.Client;
 import com.example.ary.mfpopularmovie.api.Service;
+import com.example.ary.mfpopularmovie.data.FavoriteContract;
 import com.example.ary.mfpopularmovie.data.FavoriteDBHelper;
 import com.example.ary.mfpopularmovie.model.Movie;
 import com.example.ary.mfpopularmovie.model.Trailer;
 import com.example.ary.mfpopularmovie.model.TrailerResponse;
+import com.example.ary.mfpopularmovie.myContentProvider.FavoriteProvider;
 import com.github.ivbaranov.mfb.MaterialFavoriteButton;
 
 import org.w3c.dom.Text;
@@ -217,7 +219,8 @@ public class DetailActivity extends AppCompatActivity {
         mFavorite.setVoteAverage(Double.parseDouble(rate));
         mFavorite.setOverview(plotSynopsis.getText().toString().trim());
 
-        favoriteDBHelper.addFavorite(mFavorite);
+        //----> FavoriteProvider.addFavorite(mFavorite);
+        //favoriteDBHelper.addFavorite(mFavorite);
 
     }
   }

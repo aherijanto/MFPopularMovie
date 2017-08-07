@@ -5,7 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.ary.mfpopularmovie.model.Movie;
 import com.example.ary.mfpopularmovie.myContentProvider.FavoriteProvider;
@@ -62,19 +64,29 @@ public class FavoriteDBHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public void addFavorite(Movie movie){
+    //public void addFavorite(Movie movie){
         //SQLiteDatabase db=this.getWritableDatabase();
-        ContentValues values=new ContentValues();
+        //ContentValues values=new ContentValues();
 
-        //values.put(FavoriteContract.FavoriteEntry.COLUMN_MOVIEID, movie.getId());
-        //values.put(FavoriteContract.FavoriteEntry.COLUMN_TITLE,movie.getOriginaltitle());
-        //values.put(FavoriteContract.FavoriteEntry.COLUMN_USERRATING, movie.getVoteAverage());
-        //values.put(FavoriteContract.FavoriteEntry.COLUMN_POSTERPATH,movie.getPosterpath());
-        //values.put(FavoriteContract.FavoriteEntry.COLUMN_PLOT_SYNOPSIS,movie.getOverview());
+
+     //   values.put(FavoriteContract.FavoriteEntry.COLUMN_MOVIEID, movie.getId());
+     //   values.put(FavoriteContract.FavoriteEntry.COLUMN_TITLE,movie.getOriginaltitle());
+     //   values.put(FavoriteContract.FavoriteEntry.COLUMN_USERRATING, movie.getVoteAverage());
+     //   values.put(FavoriteContract.FavoriteEntry.COLUMN_POSTERPATH,movie.getPosterpath());
+     //   values.put(FavoriteContract.FavoriteEntry.COLUMN_PLOT_SYNOPSIS,movie.getOverview());
+
+     //   Uri uri=;
+       //getContentResolver().insert(FavoriteProvider.CONTENT_URL,values);
+   //     if(uri != null) {
+   //         Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
+   //     }
+
 
         //db.insert(FavoriteContract.FavoriteEntry.TABLE_NAME,null,values);
         //db.close();
-    }
+   // }
+
+
 
     public void deleteFavorite(int id){
         SQLiteDatabase db=this.getWritableDatabase();

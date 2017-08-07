@@ -11,9 +11,11 @@ import android.net.Uri;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.widget.Toast;
 
 import com.example.ary.mfpopularmovie.data.FavoriteContract;
 import com.example.ary.mfpopularmovie.data.FavoriteDBHelper;
+import com.example.ary.mfpopularmovie.model.Movie;
 
 import java.util.HashMap;
 
@@ -24,7 +26,7 @@ import java.util.HashMap;
 public class FavoriteProvider extends ContentProvider {
     static final String PROVIDER_NAME="com.example.ary.mfpopularmovie.myContentProvider.FavoriteProvider";
     static final String myURL="content://"+PROVIDER_NAME+"/myfavorite";
-    static final Uri CONTENT_URL=Uri.parse(myURL);
+    public static final Uri CONTENT_URL = Uri.parse(myURL);
 
     static final String mId="myid";
     static final String mTitle="myTitle";
@@ -179,6 +181,29 @@ public class FavoriteProvider extends ContentProvider {
 
         return rowsUpdated;
     }
+
+    public void addFavorite(Movie movie){
+        //SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues values=new ContentValues();
+
+
+        values.put(FavoriteContract.FavoriteEntry.COLUMN_MOVIEID, movie.getId());
+        values.put(FavoriteContract.FavoriteEntry.COLUMN_TITLE,movie.getOriginaltitle());
+        values.put(FavoriteContract.FavoriteEntry.COLUMN_USERRATING, movie.getVoteAverage());
+        values.put(FavoriteContract.FavoriteEntry.COLUMN_POSTERPATH,movie.getPosterpath());
+        values.put(FavoriteContract.FavoriteEntry.COLUMN_PLOT_SYNOPSIS,movie.getOverview());
+
+        Uri uri=getContext().getContentResolver().insert(FavoriteProvider.CONTENT_URL,values);
+        //getContentResolver().insert(FavoriteProvider.CONTENT_URL,values);
+        //if(uri != null) {
+        //    Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
+        //}
+
+
+        //db.insert(FavoriteContract.FavoriteEntry.TABLE_NAME,null,values);
+        //db.close();
+    }
+
 
 }
 
