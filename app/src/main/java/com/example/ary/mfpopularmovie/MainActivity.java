@@ -10,6 +10,7 @@ import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -48,14 +49,26 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     private AppCompatActivity activity=MainActivity.this;
     public static final String LOG_TAG = MoviesAdapter.class.getName();
 
+    public static final String MY_KEY="com.example.ary.mfpopularmovie.my_key";
+
 
 
     SharedPreferences preferences;
+
+    public List<Movie> myMovieList=new ArrayList<Movie>();
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(MY_KEY, (Parcelable) myMovieList);
+    }
 
     @Override
     protected void onCreate(@Nullable  Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        savedInstanceState.getParcelableArrayList(MY_KEY);
 
        preferences = PreferenceManager.getDefaultSharedPreferences(this);
        preferences.registerOnSharedPreferenceChangeListener(this);
