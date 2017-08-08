@@ -55,27 +55,34 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     SharedPreferences preferences;
 
-    public List<Movie> myMovieList=new ArrayList<Movie>();
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
 
         super.onSaveInstanceState(outState);
-        outState.putParcelable(MY_KEY, (Parcelable) myMovieList);
+        outState.putParcelableArrayList(MY_KEY, (ArrayList<? extends Parcelable>) movieList);
     }
 
     @Override
     protected void onCreate(@Nullable  Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        savedInstanceState.getParcelableArrayList(MY_KEY);
+
+        if(savedInstanceState == null){
+            loadJSON();
+        }else{
+            savedInstanceState.getParcelableArrayList(MY_KEY);
+            //bind to adapter
+        }
+
 
        preferences = PreferenceManager.getDefaultSharedPreferences(this);
        preferences.registerOnSharedPreferenceChangeListener(this);
 
 
 
-        loadview();
+        //loadview();
         //swipecontainer = (SwipeRefreshLayout) findViewById(R.id.main_content);
         //swipecontainer.setColorSchemeResources(android.R.color.holo_orange_dark);
         //swipecontainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
