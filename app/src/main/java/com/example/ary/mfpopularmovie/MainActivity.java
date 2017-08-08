@@ -73,7 +73,29 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             loadJSON();
         }else{
             savedInstanceState.getParcelableArrayList(MY_KEY);
-            //bind to adapter
+
+            Client Client = new Client();
+
+            Service apiService = com.example.ary.mfpopularmovie.api.Client.getClient().create(Service.class);
+            retrofit2.Call<MoviesResponse> call = apiService.getPopularMovies(BuildConfig.MY_API_TOKEN);
+            call.enqueue(new Callback<MoviesResponse>() {
+                @Override
+                public void onResponse(retrofit2.Call<MoviesResponse> call, Response<MoviesResponse> response) {
+                    List<Movie> movies = response.body().getResults();
+                    recyclerView.setAdapter(new MoviesAdapter(getApplicationContext(), movies));
+                    recyclerView.smoothScrollToPosition(0);
+                    if (swipecontainer.isRefreshing()) {
+                        swipecontainer.setRefreshing(false);
+                    }
+                    pd.dismiss();
+                }
+
+                @Override
+                public void onFailure(retrofit2.Call<MoviesResponse> call, Throwable t) {
+                    Log.d("Something Error", t.getMessage());
+                    Toast.makeText(MainActivity.this, "Fetching Error", Toast.LENGTH_SHORT).show();
+                }
+            });//bind to adapter
         }
 
 
