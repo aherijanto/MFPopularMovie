@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         }else{
             ArrayList movies = savedInstanceState.getParcelableArrayList(MY_KEY);
             recyclerView.setAdapter(new MoviesAdapter(getApplicationContext(), movies));
+            pd.dismiss();
 
 
             }//bind to adapter
