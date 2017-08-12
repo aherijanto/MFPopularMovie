@@ -190,15 +190,15 @@ public class Movie implements Parcelable{
         return 0;
     }
 
-    public static final Creator<MovieParcel> CREATOR = new Creator<MovieParcel>() {
+    public static final Creator<Movie> CREATOR = new Creator<Movie>() {
         @Override
-        public MovieParcel createFromParcel(Parcel in) {
-            return new MovieParcel(in);
+        public Movie createFromParcel(Parcel in) {
+            return new Movie(in);
         }
 
         @Override
-        public MovieParcel[] newArray(int size) {
-            return new MovieParcel[size];
+        public Movie[] newArray(int size) {
+            return new Movie[size];
         }
     };
 }

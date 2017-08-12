@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @Override
     protected void onCreate(@Nullable  Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         setContentView(R.layout.activity_main);
 
         if(savedInstanceState == null){
