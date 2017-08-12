@@ -61,7 +61,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     protected void onSaveInstanceState(Bundle outState) {
 
         super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(MY_KEY, (ArrayList<? extends Parcelable>) movieList);
+        ArrayList movies = new ArrayList(movieList);
+        outState.putParcelableArrayList(MY_KEY,  movies);
     }
 
     @Override
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         if(savedInstanceState == null){
             loadJSON();
         }else{
-            ArrayList<Movie> movies = savedInstanceState.getParcelableArrayList(MY_KEY);
+            ArrayList movies = savedInstanceState.getParcelableArrayList(MY_KEY);
             recyclerView.setAdapter(new MoviesAdapter(getApplicationContext(), movies));
 
 

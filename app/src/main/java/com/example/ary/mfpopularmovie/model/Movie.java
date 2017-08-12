@@ -1,5 +1,9 @@
 package com.example.ary.mfpopularmovie.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import com.example.ary.mfpopularmovie.parcelable.MovieParcel;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -9,7 +13,7 @@ import java.util.List;
  * Created by ary on 7/1/17.
  */
 
-public class Movie {
+public class Movie implements Parcelable{
     @SerializedName("poster_path")
     private String posterpath;
 
@@ -50,6 +54,10 @@ public class Movie {
     private Double voteaverage;
 
 
+    public Movie(){
+
+
+    }
     public Movie(String posterpath,Boolean adult,String overview,String releasedate,List<Integer> genreid,Integer id, String originaltitle,
                 String originallanguage, String title, String backdrop, Double popularity,Integer votecount, Double voteaverage){
 
@@ -68,9 +76,7 @@ public class Movie {
 
     }
 
-    public Movie(){
 
-    }
 
     String imageURL="https://image.tmdb.org/t/p/w500";
 
@@ -155,4 +161,44 @@ public class Movie {
     public void setVoteAverage(Double voteaverage){
         this.voteaverage=voteaverage;
     }
+
+
+
+
+    protected Movie(Parcel in) {
+        originaltitle = in.readString();
+        id = in.readInt();
+        //mUrl = in.readString();
+        overview= in.readString();
+        releasedate = in.readString();
+        //favourite = in.readByte() != 0;
+        title = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(originaltitle);
+        dest.writeInt(id);
+        //dest.writeString(mUrl);
+        dest.writeString(overview);
+        //dest.writeDouble(rating);
+        dest.writeString(releasedate);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<MovieParcel> CREATOR = new Creator<MovieParcel>() {
+        @Override
+        public MovieParcel createFromParcel(Parcel in) {
+            return new MovieParcel(in);
+        }
+
+        @Override
+        public MovieParcel[] newArray(int size) {
+            return new MovieParcel[size];
+        }
+    };
 }
