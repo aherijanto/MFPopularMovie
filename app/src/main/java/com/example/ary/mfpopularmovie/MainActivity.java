@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 //
         setContentView(R.layout.activity_main);
 
+        swipecontainer = (SwipeRefreshLayout) findViewById(R.id.main_content);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         movieList = new ArrayList<Movie>();
         adapter = new MoviesAdapter(this, movieList);
@@ -152,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         favoriteDBHelper=new FavoriteDBHelper(activity);
 
-        swipecontainer = (SwipeRefreshLayout) findViewById(R.id.main_content);
+        //swipecontainer = (SwipeRefreshLayout) findViewById(R.id.main_content);
         swipecontainer.setColorSchemeResources(android.R.color.holo_orange_dark);
         swipecontainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
