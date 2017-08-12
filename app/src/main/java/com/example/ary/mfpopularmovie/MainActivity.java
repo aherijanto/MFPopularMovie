@@ -68,8 +68,23 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @Override
     protected void onCreate(@Nullable  Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+
+
         setContentView(R.layout.activity_main);
+
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        movieList = new ArrayList<Movie>();
+        adapter = new MoviesAdapter(this, movieList);
+
+        if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        } else {
+            recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
+        }
+
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
         if(savedInstanceState == null){
             loadJSON();
