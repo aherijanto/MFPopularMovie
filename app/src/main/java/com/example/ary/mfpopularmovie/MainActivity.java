@@ -136,9 +136,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         pd.setCancelable(true);
         pd.show();
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        movieList = new ArrayList<Movie>();
-        adapter = new MoviesAdapter(this, movieList);
+        //recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        //movieList = new ArrayList<Movie>();
+        //adapter = new MoviesAdapter(this, movieList);
 
         if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
@@ -179,18 +179,18 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     }
 
     private void loadviewFavorite() {
-        recyclerView=(RecyclerView)findViewById(R.id.recycler_view);
-        movieList=new ArrayList<Movie>();
-        adapter=new MoviesAdapter(this,movieList);
-        if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        } else {
-            recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
-        }
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-        favoriteDBHelper=new FavoriteDBHelper(activity);
+        //recyclerView=(RecyclerView)findViewById(R.id.recycler_view);
+        //movieList=new ArrayList<Movie>();
+        //adapter=new MoviesAdapter(this,movieList);
+        //if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+        //    recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        //} else {
+        //    recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
+       // }
+       // recyclerView.setItemAnimator(new DefaultItemAnimator());
+        //recyclerView.setAdapter(adapter);
+       // adapter.notifyDataSetChanged();
+       // favoriteDBHelper=new FavoriteDBHelper(activity);
         getAllFavorite();
 
     }
