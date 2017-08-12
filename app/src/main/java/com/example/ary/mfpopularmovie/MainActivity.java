@@ -73,6 +73,12 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         setContentView(R.layout.activity_main);
 
         swipecontainer = (SwipeRefreshLayout) findViewById(R.id.main_content);
+
+        pd = new ProgressDialog(this);
+        pd.setMessage("Loading Movies Data...");
+        pd.setCancelable(true);
+        pd.show();
+
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         movieList = new ArrayList<Movie>();
         adapter = new MoviesAdapter(this, movieList);
@@ -132,10 +138,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     }
 
     public void loadview() {
-        pd = new ProgressDialog(this);
-        pd.setMessage("Loading Movies Data...");
-        pd.setCancelable(true);
-        pd.show();
+        //pd = new ProgressDialog(this);
+        //pd.setMessage("Loading Movies Data...");
+        //pd.setCancelable(true);
+        //pd.show();
 
         //recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         //movieList = new ArrayList<Movie>();
