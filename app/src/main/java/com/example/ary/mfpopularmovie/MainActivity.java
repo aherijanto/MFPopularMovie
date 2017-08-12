@@ -217,8 +217,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             call.enqueue(new Callback<MoviesResponse>() {
                 @Override
                 public void onResponse(retrofit2.Call<MoviesResponse> call, Response<MoviesResponse> response) {
-                    List<Movie> movies = response.body().getResults();
-                    recyclerView.setAdapter(new MoviesAdapter(getApplicationContext(), movies));
+                    List<Movie> movieList = response.body().getResults();
+                    recyclerView.setAdapter(new MoviesAdapter(getApplicationContext(), movieList));
                     recyclerView.smoothScrollToPosition(0);
                     if (swipecontainer.isRefreshing()) {
                         swipecontainer.setRefreshing(false);
